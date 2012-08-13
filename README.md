@@ -32,7 +32,7 @@ Property | Description | Default
 eFormOnBeforeFormParse | event funktion for eForm (will be called after the stupidQuestion event functions) | -
 eFormOnMailSent | event funktion for eForm (will be called after the stupidQuestion event functions) | -
 language | which language file is used | english
-template | template chunk for the stupid question form field | formcode.template.html in templates folder
+template | template chunk for the stupid question form field | `formcode.template.html` in folder `templates`
 
 Jot Usage
 --------------------------------------------------------------------------------
