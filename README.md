@@ -24,8 +24,10 @@ eForm Usage
 
 The snippet has to be invoked before the eForm call(s) it should work on. If no other eform events should be called, the snippet could be called by eForm parameter eForm runSnippet. Otherwise the original event functions could be called in stupidQuestion snippet.
 
-``[!StupidQuestion? &eFormOnBeforeFormParse=`…` &eFormOnMailSent=`…` &language=`…` &template=`…`!]``
-``[!eForm? &eFormOnBeforeFormParse=`stupidQuestionBeforeFormParse` &eFormOnMailSent=`stupidQuestionMailSent` ... !]``
+```
+[!StupidQuestion? &eFormOnBeforeFormParse=`…` &eFormOnMailSent=`…` &language=`…` &template=`…`!]
+[!eForm? &eFormOnBeforeFormParse=`stupidQuestionBeforeFormParse` &eFormOnMailSent=`stupidQuestionMailSent` ... !]
+```
 
 Property | Description | Default
 ---- | ----------- | -------
@@ -38,7 +40,9 @@ Jot Usage
 --------------------------------------------------------------------------------
 
 The stupid question captcha could be used in Jot, too. Insert the following call inside of the Jot form template chunk
-``[!StupidQuestion? &language=`…` &template=`…`!]``
+```
+[!StupidQuestion? &language=`…` &template=`…`!]
+```
 
 After that the following lines have to be patched into jot.class.inc.php
 
@@ -69,7 +73,7 @@ if ($saveComment && $this->config["captcha"] == 3) {
 // -- stupidQuestion
 ```
 
-After that Jot should be called with the parameter ``&captcha=`3```
+After that Jot should be called with the parameter ``&captcha=`3` ``
 
 Property | Description | Default
 ---- | ----------- | -------
