@@ -43,26 +43,31 @@ The stupid question captcha could be used in Jot, too. Insert the following call
 After that the following lines have to be patched into jot.class.inc.php
 
 Replace line 540:
-`		if ($saveComment && !(($this->config["captcha"] == 0 || $this->config["captcha"] == 3 || isset($_POST['vericode']) && isset($_SESSION['veriword']) && $_SESSION['veriword'] == $_POST['vericode']))) {`
+```php
+if ($saveComment && !(($this->config["captcha"] == 0 || $this->config["captcha"] == 3 || isset($_POST['vericode']) && isset($_SESSION['veriword']) && $_SESSION['veriword'] == $_POST['vericode']))) {
+```
 
 
 Add Before line 548:
-`		// -- stupidQuestion enhancement
-		if ($saveComment && $this->config["captcha"] == 3) {
-			if (!class_exists('stupidQuestion')) {
-				define(DF_PATH, 'assets/snippets/stupidquestion/');
-				define(DF_BASE_PATH, MODX_BASE_PATH . DF_PATH);
-				include ('assets/snippets/stupidquestion/stupidQuestion.class.php');
-			}
-			$stupidQuestion = new stupidQuestion('german');
-			if (isset($_POST[$stupidQuestion->answer['formfield']]) && $_POST[$stupidQuestion->answer['formfield']] == $stupidQuestion->answer['answer']) {
-				$stupidQuestion->cleanUp();
-			} else {
-					$this->form['error'] = 2; // Veriword / Captcha incorrect
-					$stupidQuestion->cleanUp();
-					return;
-			}
-		} // -- stupidQuestion`
+```php
+// -- stupidQuestion enhancement
+if ($saveComment && $this->config["captcha"] == 3) {
+	if (!class_exists('stupidQuestion')) {
+		define(DF_PATH, 'assets/snippets/stupidquestion/');
+		define(DF_BASE_PATH, MODX_BASE_PATH . DF_PATH);
+		include ('assets/snippets/stupidquestion/stupidQuestion.class.php');
+	}
+	$stupidQuestion = new stupidQuestion('german');
+	if (isset($_POST[$stupidQuestion->answer['formfield']]) && $_POST[$stupidQuestion->answer['formfield']] == $stupidQuestion->answer['answer']) {
+		$stupidQuestion->cleanUp();
+	} else {
+		$this->form['error'] = 2; // Veriword / Captcha incorrect
+		$stupidQuestion->cleanUp();
+		return;
+	}
+}
+// -- stupidQuestion
+```
 
 After that Jot should be called with the parameter ``&captcha=`3```
 
