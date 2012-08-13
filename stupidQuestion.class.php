@@ -112,7 +112,6 @@ class stupidQuestion {
 		$packer = new JavaScriptPacker($jsCode, 'Normal', true, false);
 		$parser = new dfChunkie('@CODE:' . $this->templates['jswrapper']);
 		$parser->AddVar('packed', $packer->pack());
-		$parser->AddVar('packed', $jsCode);
 		$this->output['jsCode'] = $parser->Render();
 		return;
 	}

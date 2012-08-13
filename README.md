@@ -12,7 +12,7 @@ Installation:
 1. Upload all files into the new folder *assets/snippets/stupidQuestion*
 2. Create a new snippet called StupidQuestion with the following snippet code
     `<?php
-    include (MODX_BASE_PATH . 'assets/snippets/stupidQuestion/stupidQuestion.snippet.php');
+    include (MODX_BASE_PATH . 'assets/snippets/stupidquestion/stupidQuestion.snippet.php');
     ?>`
 
 Usage
@@ -20,13 +20,13 @@ Usage
 
 The snippet has to be invoked before the eForm call(s) it should work on. If no other eform events should be called, the snippet could be called by eForm parameter eForm runSnippet. Otherwise the original event functions could be called in stupidQuestion snippet.
 
-`[!StupidQuestion? &eFormOnBeforeFormParse=`…` &eFormOnBeforeMailSent=`…` &language=`english`!]
-[!eForm? &eFormOnBeforeFormParse=`stupidQuestionBeforeFormParse` &eFormOnBeforeMailSent=`stupidQuestionMailSent` ... !]`
+``[!StupidQuestion? &eFormOnBeforeFormParse=`…` &eFormOnMailSent=`…` &language=`english`!]
+[!eForm? &eFormOnBeforeFormParse=`stupidQuestionBeforeFormParse` &eFormOnMailSent=`stupidQuestionMailSent` ... !]``
 
 Property | Description | Default
 ---- | ----------- | -------
 eFormOnBeforeFormParse | event funktion for eForm (will be called after the stupidQuestion event functions) | -
-eFormOnBeforeMailSent | event funktion for eForm (will be called after the stupidQuestion event functions) | -
+eFormOnMailSent | event funktion for eForm (will be called after the stupidQuestion event functions) | -
 language | which language file is used | english
 
 Notes:

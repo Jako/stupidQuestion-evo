@@ -9,7 +9,7 @@
  */
 
 // set customtv (base) path
-define(DF_PATH, 'assets/snippets/stupidQuestion/');
+define(DF_PATH, 'assets/snippets/stupidquestion/');
 define(DF_BASE_PATH, MODX_BASE_PATH . DF_PATH);
 
 if (!class_exists('stupidQuestion')) {
