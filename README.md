@@ -24,8 +24,8 @@ eForm Usage
 
 The snippet has to be invoked before the eForm call(s) it should work on. If no other eform events should be called, the snippet could be called by eForm parameter eForm runSnippet. Otherwise the original event functions could be called in stupidQuestion snippet.
 
-``[!StupidQuestion? &eFormOnBeforeFormParse=`…` &eFormOnMailSent=`…` &language=`english`!]
-[!eForm? &eFormOnBeforeFormParse=`stupidQuestionBeforeFormParse` &eFormOnMailSent=`stupidQuestionMailSent` ... !]``
+``[!StupidQuestion? &eFormOnBeforeFormParse=`…` &eFormOnMailSent=`…` &language=`english`!]``
+``[!eForm? &eFormOnBeforeFormParse=`stupidQuestionBeforeFormParse` &eFormOnMailSent=`stupidQuestionMailSent` ... !]``
 
 Property | Description | Default
 ---- | ----------- | -------
