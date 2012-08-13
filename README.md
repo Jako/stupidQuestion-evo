@@ -24,7 +24,7 @@ eForm Usage
 
 The snippet has to be invoked before the eForm call(s) it should work on. If no other eform events should be called, the snippet could be called by eForm parameter eForm runSnippet. Otherwise the original event functions could be called in stupidQuestion snippet.
 
-``[!StupidQuestion? &eFormOnBeforeFormParse=`…` &eFormOnMailSent=`…` &language=`english`!]``
+``[!StupidQuestion? &eFormOnBeforeFormParse=`…` &eFormOnMailSent=`…` &language=`…` &template=`…`!]``
 ``[!eForm? &eFormOnBeforeFormParse=`stupidQuestionBeforeFormParse` &eFormOnMailSent=`stupidQuestionMailSent` ... !]``
 
 Property | Description | Default
@@ -49,15 +49,12 @@ Replace line 540:
 Add Before line 548:
 `		// -- stupidQuestion enhancement
 		if ($saveComment && $this->config["captcha"] == 3) {
-
 			if (!class_exists('stupidQuestion')) {
 				define(DF_PATH, 'assets/snippets/stupidquestion/');
 				define(DF_BASE_PATH, MODX_BASE_PATH . DF_PATH);
 				include ('assets/snippets/stupidquestion/stupidQuestion.class.php');
 			}
-		
 			$stupidQuestion = new stupidQuestion('german');
-		
 			if (isset($_POST[$stupidQuestion->answer['formfield']]) && $_POST[$stupidQuestion->answer['formfield']] == $stupidQuestion->answer['answer']) {
 				$stupidQuestion->cleanUp();
 			} else {
@@ -71,10 +68,8 @@ After that Jot should be called with the parameter ``&captcha=`3```
 
 Property | Description | Default
 ---- | ----------- | -------
-eFormOnBeforeFormParse | event funktion for eForm (will be called after the stupidQuestion event functions) | -
-eFormOnMailSent | event funktion for eForm (will be called after the stupidQuestion event functions) | -
 language | which language file is used | english
-template | template chunk for the stupid question form field | formcode.template.html in templates folder
+template | template chunk for the stupid question form field | `formcode.template.html` in folder `templates`
 
 Notes:
 --------------------------------------------------------------------------------
