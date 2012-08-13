@@ -1,7 +1,7 @@
 <?php
 /*
  * @category 	classfile
- * @version 	0.5
+ * @version 	0.6
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @author		Jako (thomas.jakobi@partout.info)
  *
@@ -18,14 +18,15 @@ if (!class_exists('dfChunkie')) {
 class stupidQuestion {
 
 	public $output = array();
+	public $answer = array();
 	private $settings = array();
 	private $templates = array();
 	private $language;
 
-	function stupidQuestion($language) {
+	function stupidQuestion($language, $formcode = '') {
 		$this->language = $language;
 		$this->setSettings();
-		$this->setTemplates();
+		$this->setTemplates($formcode);
 		$this->setQuestion();
 	}
 
@@ -58,10 +59,14 @@ class stupidQuestion {
 		return;
 	}
 
-	function setTemplates() {
-		$this->templates['formcode'] = file_get_contents($this->includeFile('formcode', 'template', '.html'));
-		$this->templates['jscode'] = file_get_contents($this->includeFile('jscode', 'template', '.js'));
-		$this->templates['jswrapper'] = file_get_contents($this->includeFile('jswrapper', 'template', '.js'));
+	function setTemplates($formcode) {
+		if ($formcode == '') {
+			$this->templates['formcode'] = '@CODE:' . file_get_contents($this->includeFile('formcode', 'template', '.html'));
+		} else {
+			$this->templates['formcode'] = $formcode;
+		}
+		$this->templates['jscode'] = '@CODE:' . file_get_contents($this->includeFile('jscode', 'template', '.js'));
+		$this->templates['jswrapper'] = '@CODE:' . file_get_contents($this->includeFile('jswrapper', 'template', '.js'));
 		return;
 	}
 
@@ -73,14 +78,17 @@ class stupidQuestion {
 		$randFormField = rand(0, count($this->settings['formFields']) - 1);
 
 		// get $_POST and replace values with session values
-		foreach ($this->settings['formFields'] as $formKey => $formField) {
-			if (in_array($formField, array_keys($_POST))) {
-				$randQuestion = $_SESSION['StupidQuestion'];
-				$randAnswer = $_SESSION['StupidQuestionAnswer'];
-				$randFormField = $formKey;
+		if (isset($_SESSION['StupidQuestion'])) {
+			foreach ($this->settings['formFields'] as $formKey => $formField) {
+				if (in_array($formField, array_keys($_POST))) {
+					$randQuestion = $_SESSION['StupidQuestion'];
+					$randAnswer = $_SESSION['StupidQuestionAnswer'];
+					$randFormField = $formKey;
+				}
 			}
 		}
 		$_SESSION['StupidQuestion'] = $randQuestion;
+		$_SESSION['StupidQuestionFormField'] = $randFormField;
 		$_SESSION['StupidQuestionAnswer'] = $randAnswer;
 
 		// form fields
@@ -91,7 +99,7 @@ class stupidQuestion {
 		$formField = $this->settings['formFields'][$randFormField];
 
 		// parse stupid question template and javscript template
-		$parser = new dfChunkie('@CODE:' . $this->templates['jscode']);
+		$parser = new dfChunkie($this->templates['jscode']);
 		$parser->AddVar('id', $formField);
 		$parser->AddVar('othervalue', $othervalue);
 		$parser->AddVar('value', $value);
@@ -101,7 +109,7 @@ class stupidQuestion {
 		$parser->AddVar('question', $frage . $this->settings['answer'][$randAnswer]);
 		$question = $parser->Render();
 
-		$parser = new dfChunkie('@CODE:' . $this->templates['formcode']);
+		$parser = new dfChunkie($this->templates['formcode']);
 		$parser->AddVar('id', $formField);
 		$parser->AddVar('value', $value);
 		$parser->AddVar('question', $question);
@@ -109,8 +117,11 @@ class stupidQuestion {
 		$parser->AddVar('requiredMessage', $this->settings['requiredMessage']);
 		$this->output['htmlCode'] = $parser->Render();
 
+		$this->answer['answer'] = $value;
+		$this->answer['formfield'] = $formField;
+
 		$packer = new JavaScriptPacker($jsCode, 'Normal', true, false);
-		$parser = new dfChunkie('@CODE:' . $this->templates['jswrapper']);
+		$parser = new dfChunkie($this->templates['jswrapper']);
 		$parser->AddVar('packed', $packer->pack());
 		$this->output['jsCode'] = $parser->Render();
 		return;
@@ -118,6 +129,7 @@ class stupidQuestion {
 
 	function cleanUp() {
 		unset($_SESSION['StupidQuestion']);
+		unset($_SESSION['StupidQuestionFormField']);
 		unset($_SESSION['StupidQuestionAnswer']);
 	}
 
