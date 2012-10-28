@@ -72,7 +72,7 @@ class stupidQuestion {
 
 	function setQuestion() {
 		// Random values
-		$randQuestion = rand(0, count($this->settings['question']) - 1);
+		$randQuestion = rand(0, count($this->settings['questions']) - 1);
 		$randIntro = rand(0, count($this->settings['intro']) - 1);
 		$randAnswer = rand(0, count($this->settings['answer']) - 1);
 		$randFormField = rand(0, count($this->settings['formFields']) - 1);
@@ -93,9 +93,9 @@ class stupidQuestion {
 
 		// form fields
 		$answer = explode(' ', $this->settings['answer'][$randAnswer]);
-		$value = ($randQuestion < count($this->settings['question'][1])) ? $answer[0] : $answer[1];
-		$othervalue = ($randQuestion < count($this->settings['question'][1])) ? $answer[1] : $answer[0];
-		$frage = $this->settings['question'][$randQuestion];
+		$value = ($randQuestion < count($this->settings['questions_first'])) ? $answer[0] : $answer[1];
+		$othervalue = ($randQuestion < count($this->settings['questions_first'])) ? $answer[1] : $answer[0];
+		$frage = $this->settings['questions'][$randQuestion];
 		$formField = $this->settings['formFields'][$randFormField];
 
 		// parse stupid question template and javscript template

@@ -8,7 +8,7 @@
  * @internal    description: <strong>0.5</strong> Captcha for MODX Evolution
  */
 
-// set customtv (base) path
+// set base path
 define(DF_PATH, 'assets/snippets/stupidquestion/');
 define(DF_BASE_PATH, MODX_BASE_PATH . DF_PATH);
 
