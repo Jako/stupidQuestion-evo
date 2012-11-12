@@ -9,7 +9,7 @@ With this eForm event functions a stupid question captcha is inserted placeholde
 
 Installation:
 --------------------------------------------------------------------------------
-1. Upload all files into the new folder *assets/snippets/stupidQuestion*
+1. Upload all files into the new folder *assets/snippets/stupidquestion*
 2. Create a new snippet called StupidQuestion with the following snippet code
     `<?php
     include (MODX_BASE_PATH . 'assets/snippets/stupidquestion/stupidQuestion.snippet.php');
@@ -39,9 +39,9 @@ template | template chunk for the stupid question form field | `formcode.templat
 Jot Usage
 --------------------------------------------------------------------------------
 
-The stupid question captcha could be used in Jot, too. Insert the following call inside of the Jot form template chunk
+The stupid question captcha could be used in Jot, too. Insert the following call inside of the Jot form template chunk. It will output the stupid question form field.
 ```
-[!StupidQuestion? &language=`…` &template=`…`!]
+[[StupidQuestionJot? &language=`…` &template=`…`]]
 ```
 
 After that the following lines have to be patched into jot.class.inc.php

@@ -5,7 +5,7 @@ $settings['questions'] = array_merge($settings['questions_first'], $settings['qu
 $settings['intro'] = array('What is [+question+]?', 'What\'s [+question+]?', 'Trick question: [+question:ucfirst+] reads:', 'Stupid question: [+question:ucfirst+] is:');
 $settings['answer'] = array('Karl Valentin', 'Peter Alexander', 'Elke Sommer', 'Anna Blume');
 $settings['formFields'] = array('stupid-question', 'silly-question', 'trickquestion', 'bottrap', 'only-one-question', 'please-answer-this');
-$settings['required'] = '(required)';
+$settings['required'] = 'required';
 $settings['requiredMessage'] = 'Please answer the question';
 ?>
 

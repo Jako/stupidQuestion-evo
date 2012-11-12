@@ -5,7 +5,7 @@
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @author		Jako (thomas.jakobi@partout.info)
  *
- * @internal    description: <strong>0.5</strong> Captcha for MODX Evolution
+ * @internal    description: <strong>0.6</strong> Stupid Question Captcha for MODX Evolution
  */
 
 if (!class_exists('JavaScriptPacker')) {
