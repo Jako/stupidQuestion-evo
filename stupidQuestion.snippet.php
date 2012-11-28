@@ -17,27 +17,36 @@ if (!class_exists('stupidQuestion')) {
 }
 
 // Parameter
-$GLOBALS['df_eFormOnBeforeFormParse'] = isset($eFormOnBeforeFormParse) ? $eFormOnBeforeFormParse : '';
-$GLOBALS['df_eFormOnMailSent'] = isset($eFormOnMailSent) ? $eFormOnMailSent : '';
-$GLOBALS['df_language'] = isset($language) ? $language : 'english';
-$GLOBALS['df_template'] = isset($template) ? $template : '';
+$language = isset($language) ? $language : 'english';
+$template = isset($template) ? $template : '';
+
+// Init class
+if (!isset($modx->stupidQuestion)) {
+	$modx->stupidQuestion = new stupidQuestion($language, $template);
+}
+
+$modx->stupidQuestion->eFormOnBeforeFormParse = isset($eFormOnBeforeFormParse) ? $eFormOnBeforeFormParse : '';
+$modx->stupidQuestion->eFormOnMailSent = isset($eFormOnMailSent) ? $eFormOnMailSent : '';
+
 if (!function_exists('stupidQuestionBeforeFormParse')) {
 
 	function stupidQuestionBeforeFormParse(&$fields, &$templates) {
-		$stupidQuestion = new stupidQuestion($GLOBALS['df_language'], $GLOBALS['df_template']);
-		$templates['tpl'] = str_replace('[+stupidquestion+]', $stupidQuestion->output['htmlCode'], $templates['tpl']);
-		$templates['tpl'] .= $stupidQuestion->output['jsCode'];
-		if ($GLOBALS['df_eFormOnBeforeFormParse'] && function_exists($GLOBALS['df_eFormOnBeforeFormParse'])) {
-			return $GLOBALS['df_eFormOnBeforeFormParse']($fields, $templates);
+		global $modx;
+
+		$templates['tpl'] = str_replace('[+stupidquestion+]', $modx->stupidQuestion->output['htmlCode'], $templates['tpl']);
+		$templates['tpl'] .= $modx->stupidQuestion->output['jsCode'];
+		if ($modx->stupidQuestion->eFormOnBeforeFormParse && function_exists($modx->stupidQuestion->eFormOnBeforeFormParse)) {
+			return $modx->stupidQuestion->eFormOnBeforeFormParse($fields, $templates);
 		}
 		return true;
 	}
 
 	function stupidQuestionMailSent(&$fields) {
-		$stupidQuestion = new stupidQuestion($GLOBALS['df_language']);
-		$stupidQuestion->cleanUp();
-		if ($GLOBALS['df_eFormOnMailSent'] && function_exists($GLOBALS['df_eFormOnMailSent'])) {
-			return $GLOBALS['df_eFormOnMailSent']($fields);
+		global $modx;
+
+		$modx->stupidQuestion->cleanUp();
+		if ($modx->stupidQuestion->eFormOnMailSent && function_exists($modx->stupidQuestion->eFormOnMailSent)) {
+			return $modx->stupidQuestion->eFormOnMailSent($fields);
 		}
 		return true;
 	}
