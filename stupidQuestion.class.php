@@ -11,7 +11,7 @@
 if (!class_exists('JavaScriptPacker')) {
 	include DF_BASE_PATH . 'includes/class.JavaScriptPacker.php';
 }
-if (!class_exists('dfChunkie')) {
+if (!class_exists('evoChunkie')) {
 	include DF_BASE_PATH . 'includes/chunkie.class.inc.php';
 }
 
@@ -107,17 +107,17 @@ if (!class_exists('stupidQuestion')) {
 			$formField = $this->settings['formFields'][$randFormField];
 
 			// parse stupid question template and javscript template
-			$parser = new dfChunkie($this->templates['jscode']);
+			$parser = new evoChunkie($this->templates['jscode']);
 			$parser->AddVar('id', $formField);
 			$parser->AddVar('othervalue', $othervalue);
 			$parser->AddVar('value', $value);
 			$jsCode = $parser->Render();
 
-			$parser = new dfChunkie('@CODE:' . $this->settings['intro'][$randIntro]);
+			$parser = new evoChunkie('@CODE:' . $this->settings['intro'][$randIntro]);
 			$parser->AddVar('question', $question . $this->settings['answer'][$randAnswer]);
 			$fullQuestion = $parser->Render();
 
-			$parser = new dfChunkie($this->templates['formcode']);
+			$parser = new evoChunkie($this->templates['formcode']);
 			$parser->AddVar('id', $formField);
 			$parser->AddVar('value', $value);
 			$parser->AddVar('question', $fullQuestion);
@@ -129,7 +129,7 @@ if (!class_exists('stupidQuestion')) {
 			$this->answer['formfield'] = $formField;
 
 			$packer = new JavaScriptPacker($jsCode, 'Normal', true, false);
-			$parser = new dfChunkie($this->templates['jswrapper']);
+			$parser = new evoChunkie($this->templates['jswrapper']);
 			$parser->AddVar('packed', $packer->pack());
 			$this->output['jsCode'] = $parser->Render();
 			return;
