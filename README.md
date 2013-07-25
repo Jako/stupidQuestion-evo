@@ -57,8 +57,8 @@ Add Before line 548:
 // -- stupidQuestion enhancement
 if ($saveComment && $this->config["captcha"] == 3) {
 	if (!class_exists('stupidQuestion')) {
-		define(DF_PATH, 'assets/snippets/stupidquestion/');
-		define(DF_BASE_PATH, MODX_BASE_PATH . DF_PATH);
+		define('DF_PATH', 'assets/snippets/stupidquestion/');
+		define('DF_BASE_PATH', MODX_BASE_PATH . DF_PATH);
 		include ('assets/snippets/stupidquestion/stupidQuestion.class.php');
 	}
 	$stupidQuestion = new stupidQuestion('german');
