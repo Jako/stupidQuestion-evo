@@ -8,7 +8,7 @@
  * @internal    description: <strong>0.6.1</strong> Stupid Question Captcha for MODX Evolution
  */
 // set customtv (base) path
-define('DF_PATH', 'assets/snippets/stupidquestion/');
+define('DF_PATH', str_replace(MODX_BASE_PATH, '', str_replace('\\', '/', realpath(dirname(__FILE__)))) . '/');
 define('DF_BASE_PATH', MODX_BASE_PATH . DF_PATH);
 
 if (!class_exists('stupidQuestion')) {
