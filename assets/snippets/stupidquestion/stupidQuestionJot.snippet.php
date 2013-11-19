@@ -1,11 +1,11 @@
 <?php
 /*
  * @category 	snippet
- * @version 	0.6
+ * @version 	0.6.1
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @author		Jako (thomas.jakobi@partout.info)
  *
- * @internal    description: <strong>0.6</strong> Stupid Question Captcha for MODX Evolution
+ * @internal    description: <strong>0.6.1</strong> Stupid Question Captcha for MODX Evolution
  */
 // set customtv (base) path
 define('DF_PATH', 'assets/snippets/stupidquestion/');

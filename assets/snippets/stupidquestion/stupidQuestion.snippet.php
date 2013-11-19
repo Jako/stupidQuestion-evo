@@ -1,11 +1,11 @@
 <?php
 /*
  * @category 	snippet
- * @version 	0.6
+ * @version 	0.6.1
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @author		Jako (thomas.jakobi@partout.info)
  *
- * @internal    description: <strong>0.6</strong> Stupid Question Captcha for MODX Evolution
+ * @internal    description: <strong>0.6.1</strong> Stupid Question Captcha for MODX Evolution
  */
 
 // set base path
@@ -25,8 +25,8 @@ if (!isset($modx->stupidQuestion)) {
 	$modx->stupidQuestion = new stupidQuestion($language, $template);
 }
 
-$modx->stupidQuestion->eFormOnBeforeFormParse = isset($eFormOnBeforeFormParse) ? $eFormOnBeforeFormParse : '';
-$modx->stupidQuestion->eFormOnMailSent = isset($eFormOnMailSent) ? $eFormOnMailSent : '';
+$eFormOnBeforeFormParse = isset($eFormOnBeforeFormParse) ? $eFormOnBeforeFormParse : '';
+$eFormOnMailSent = isset($eFormOnMailSent) ? $eFormOnMailSent : '';
 
 if (!function_exists('stupidQuestionBeforeFormParse')) {
 
@@ -35,8 +35,8 @@ if (!function_exists('stupidQuestionBeforeFormParse')) {
 
 		$templates['tpl'] = str_replace('[+stupidquestion+]', $modx->stupidQuestion->output['htmlCode'], $templates['tpl']);
 		$templates['tpl'] .= $modx->stupidQuestion->output['jsCode'];
-		if ($modx->stupidQuestion->eFormOnBeforeFormParse && function_exists($modx->stupidQuestion->eFormOnBeforeFormParse)) {
-			return $modx->stupidQuestion->eFormOnBeforeFormParse($fields, $templates);
+		if ($eFormOnBeforeFormParse && function_exists($eFormOnBeforeFormParse)) {
+			return $eFormOnBeforeFormParse($fields, $templates);
 		}
 		return true;
 	}
@@ -45,8 +45,8 @@ if (!function_exists('stupidQuestionBeforeFormParse')) {
 		global $modx;
 
 		$modx->stupidQuestion->cleanUp();
-		if ($modx->stupidQuestion->eFormOnMailSent && function_exists($modx->stupidQuestion->eFormOnMailSent)) {
-			return $modx->stupidQuestion->eFormOnMailSent($fields);
+		if ($eFormOnMailSent && function_exists($eFormOnMailSent)) {
+			return $eFormOnMailSent($fields);
 		}
 		return true;
 	}

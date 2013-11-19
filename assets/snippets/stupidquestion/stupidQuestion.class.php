@@ -1,11 +1,11 @@
 <?php
 /*
  * @category 	classfile
- * @version 	0.6
+ * @version 	0.6.1
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @author		Jako (thomas.jakobi@partout.info)
  *
- * @internal    description: <strong>0.6</strong> Stupid Question Captcha for MODX Evolution
+ * @internal    description: <strong>0.6.1</strong> Stupid Question Captcha for MODX Evolution
  */
 
 if (!class_exists('JavaScriptPacker')) {
@@ -21,8 +21,6 @@ if (!class_exists('stupidQuestion')) {
 
 		public $output = array();
 		public $answer = array();
-		public $eFormOnBeforeFormParse = '';
-		public $eFormOnMailSent = '';
 		private $settings = array();
 		private $templates = array();
 		private $language;
@@ -70,7 +68,7 @@ if (!class_exists('stupidQuestion')) {
 				$this->templates['formcode'] = $formcode;
 			}
 			$this->templates['jscode'] = '@CODE:' . file_get_contents($this->includeFile('jscode', 'template', '.js'));
-			$this->templates['jswrapper'] = '@CODE:' . file_get_contents($this->includeFile('jswrapper', 'template', '.js'));
+			$this->templates['jswrapper'] = '@CODE:' . file_get_contents($this->includeFile('jswrapper', 'template', '.html'));
 			return;
 		}
 
