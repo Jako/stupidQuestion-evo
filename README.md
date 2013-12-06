@@ -12,11 +12,11 @@ Installation:
 1. Upload all files into the new folder *assets/snippets/stupidquestion*
 2. Create a new snippet called StupidQuestion with the following snippet code
     `<?php
-    include (MODX_BASE_PATH . 'assets/snippets/stupidquestion/stupidQuestion.snippet.php');
+    return include (MODX_BASE_PATH . 'assets/snippets/stupidquestion/stupidQuestion.snippet.php');
     ?>`
 3. Create a new snippet called StupidQuestionJot with the following snippet code
     `<?php
-    include (MODX_BASE_PATH . 'assets/snippets/stupidquestion/stupidQuestionJot.snippet.php');
+    return include (MODX_BASE_PATH . 'assets/snippets/stupidquestion/stupidQuestionJot.snippet.php');
     ?>`
 
 eForm Usage
