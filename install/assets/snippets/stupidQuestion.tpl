@@ -12,4 +12,4 @@
  * @internal    @modx_category Forms and Mail
  * @internal    @installset base, sample
  */
-require(MODX_BASE_PATH . 'assets/snippets/stupidquestion/stupidQuestion.snippet.php');
+return include(MODX_BASE_PATH . 'assets/snippets/stupidquestion/stupidQuestion.snippet.php');
