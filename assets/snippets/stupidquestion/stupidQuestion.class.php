@@ -1,11 +1,11 @@
 <?php
 /*
  * @category 	classfile
- * @version 	0.6.1
+ * @version 	0.6.3
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @author		Jako (thomas.jakobi@partout.info)
  *
- * @internal    description: <strong>0.6.1</strong> Stupid Question Captcha for MODX Evolution
+ * @internal    description: <strong>0.6.3</strong> Stupid Question Captcha for MODX Evolution
  */
 
 if (!class_exists('JavaScriptPacker')) {
@@ -26,6 +26,10 @@ if (!class_exists('stupidQuestion')) {
 		private $language;
 
 		function stupidQuestion($language, $formcode = '') {
+			$this->init($language, $formcode);
+		}
+
+		function init($language, $formcode) {
 			$this->language = $language;
 			$this->setSettings();
 			$this->setTemplates($formcode);

@@ -1,11 +1,11 @@
 <?php
 /*
  * @category 	snippet
- * @version 	0.6.1
+ * @version 	0.6.3
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @author		Jako (thomas.jakobi@partout.info)
  *
- * @internal    description: <strong>0.6.1</strong> Stupid Question Captcha for MODX Evolution
+ * @internal    description: <strong>0.6.3</strong> Stupid Question Captcha for MODX Evolution
  */
 
 // set base path
@@ -23,10 +23,12 @@ $template = isset($template) ? $template : '';
 // Init class
 if (!isset($modx->stupidQuestion)) {
 	$modx->stupidQuestion = new stupidQuestion($language, $template);
+} else {
+	$modx->stupidQuestion->init($language, $template);
 }
 
-$eFormOnBeforeFormParse = isset($eFormOnBeforeFormParse) ? $eFormOnBeforeFormParse : '';
-$eFormOnMailSent = isset($eFormOnMailSent) ? $eFormOnMailSent : '';
+$GLOBALS['sqOnBeforeFormParse'] = isset($eFormOnBeforeFormParse) ? $eFormOnBeforeFormParse : '';
+$GLOBALS['sqOnMailSent'] = isset($eFormOnMailSent) ? $eFormOnMailSent : '';
 
 if (!function_exists('stupidQuestionBeforeFormParse')) {
 
@@ -35,8 +37,8 @@ if (!function_exists('stupidQuestionBeforeFormParse')) {
 
 		$templates['tpl'] = str_replace('[+stupidquestion+]', $modx->stupidQuestion->output['htmlCode'], $templates['tpl']);
 		$templates['tpl'] .= $modx->stupidQuestion->output['jsCode'];
-		if ($eFormOnBeforeFormParse && function_exists($eFormOnBeforeFormParse)) {
-			return $eFormOnBeforeFormParse($fields, $templates);
+		if ($GLOBALS['sqOnBeforeFormParse'] && function_exists($GLOBALS['sqOnBeforeFormParse'])) {
+			return $GLOBALS['sqOnBeforeFormParse']($fields, $templates);
 		}
 		return true;
 	}
@@ -45,8 +47,8 @@ if (!function_exists('stupidQuestionBeforeFormParse')) {
 		global $modx;
 
 		$modx->stupidQuestion->cleanUp();
-		if ($eFormOnMailSent && function_exists($eFormOnMailSent)) {
-			return $eFormOnMailSent($fields);
+		if ($GLOBALS['sqOnMailSent'] && function_exists($GLOBALS['sqOnMailSent'])) {
+			return $GLOBALS['sqOnMailSent']($fields, $templates);
 		}
 		return true;
 	}

@@ -5,7 +5,7 @@
  * Userfriendly Captcha
  *
  * @category	snippet
- * @version 	0.6
+ * @version 	0.6.3
  * @license 	http://www.gnu.org/copyleft/gpl.html GNU Public License (GPL)
  * @author      Jako
  * @internal    @properties
